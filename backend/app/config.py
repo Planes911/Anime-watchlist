@@ -18,7 +18,7 @@ class Settings(BaseSettings):
 
     # bcrypt work factor. 12 is a sound default; the test suite lowers it to stay fast.
     bcrypt_rounds: int = 12
-    
+
     @field_validator("database_url")
     @classmethod
     def validate_database_url(cls, v: str) -> str:
