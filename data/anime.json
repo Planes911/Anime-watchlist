@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "title": "Fullmetal Alchemist: Brotherhood",
+    "year": 2009,
+    "studio": "Bones",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ],
+    "rating": 9.1,
+    "episodes": "64 episodes",
+    "synopsis": "Dua bersaudara Edward dan Alphonse Elric kehilangan tubuh mereka setelah mencoba menghidupkan kembali ibu mereka dengan alkimia terlarang. Mereka mencari Batu Bijak untuk memulihkan apa yang hilang.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1223/96541.jpg",
+    "cast": [
+      "Romi Park",
+      "Rie Kugimiya",
+      "Shinichiro Miki",
+      "Fumiko Orikasa"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Attack on Titan",
+    "year": 2013,
+    "studio": "Wit Studio",
+    "genres": [
+      "Action",
+      "Drama",
+      "Fantasy"
+    ],
+    "rating": 8.5,
+    "episodes": "25 episodes",
+    "synopsis": "Setelah raksasa pemakan manusia menghancurkan tembok kota, Eren Yeager bersumpah memusnahkan mereka semua dan bergabung dengan pasukan pengintai demi merebut kembali kebebasan umat manusia.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/10/47347.jpg",
+    "cast": [
+      "Yuki Kaji",
+      "Yui Ishikawa",
+      "Marina Inoue",
+      "Hiroshi Kamiya"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Death Note",
+    "year": 2006,
+    "studio": "Madhouse",
+    "genres": [
+      "Mystery",
+      "Psychological",
+      "Thriller"
+    ],
+    "rating": 8.6,
+    "episodes": "37 episodes",
+    "synopsis": "Siswa jenius Light Yagami menemukan buku catatan yang bisa membunuh siapa pun yang namanya ditulis di dalamnya. Ia mulai membersihkan dunia dari kejahatan, sementara detektif misterius L memburunya.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/9/9453.jpg",
+    "cast": [
+      "Mamoru Miyano",
+      "Kappei Yamaguchi",
+      "Shido Nakamura",
+      "Aya Hirano"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Cowboy Bebop",
+    "year": 1998,
+    "studio": "Sunrise",
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Adventure"
+    ],
+    "rating": 8.7,
+    "episodes": "26 episodes",
+    "synopsis": "Pada tahun 2071, sekelompok pemburu hadiah di atas pesawat Bebop menjelajahi tata surya sambil dikejar masa lalu masing-masing, diiringi musik jazz yang ikonik.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/4/19644.jpg",
+    "cast": [
+      "Koichi Yamadera",
+      "Unsho Ishizuka",
+      "Megumi Hayashibara",
+      "Aoi Tada"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Demon Slayer: Kimetsu no Yaiba",
+    "year": 2019,
+    "studio": "Ufotable",
+    "genres": [
+      "Action",
+      "Fantasy",
+      "Supernatural"
+    ],
+    "rating": 8.4,
+    "episodes": "26 episodes",
+    "synopsis": "Tanjiro Kamado menjadi pemburu iblis setelah keluarganya dibantai dan adiknya Nezuko berubah menjadi iblis. Ia berlatih keras untuk menemukan obat bagi adiknya.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1286/99889.jpg",
+    "cast": [
+      "Natsuki Hanae",
+      "Akari Kito",
+      "Hiro Shimono",
+      "Yoshitsugu Matsuoka"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Spirited Away",
+    "year": 2001,
+    "studio": "Studio Ghibli",
+    "genres": [
+      "Adventure",
+      "Fantasy",
+      "Family"
+    ],
+    "rating": 8.8,
+    "episodes": "1 film (125 menit)",
+    "synopsis": "Chihiro, gadis berusia 10 tahun, tersesat ke dunia roh. Setelah orang tuanya berubah menjadi babi, ia bekerja di pemandian air panas para dewa untuk membebaskan mereka.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/6/79597.jpg",
+    "cast": [
+      "Rumi Hiiragi",
+      "Miyu Irino",
+      "Mari Natsuki",
+      "Takashi Naito"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Your Name",
+    "year": 2016,
+    "studio": "CoMix Wave Films",
+    "genres": [
+      "Romance",
+      "Drama",
+      "Supernatural"
+    ],
+    "rating": 8.8,
+    "episodes": "1 film (107 menit)",
+    "synopsis": "Mitsuha, gadis desa, dan Taki, pelajar Tokyo, tiba-tiba saling bertukar tubuh dalam mimpi. Saat mereka mulai saling mengenal, sebuah tragedi yang mengintai menguji ikatan mereka.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/5/87048.jpg",
+    "cast": [
+      "Ryunosuke Kamiki",
+      "Mone Kamishiraishi",
+      "Ryo Narita",
+      "Aoi Yuki"
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Steins;Gate",
+    "year": 2011,
+    "studio": "White Fox",
+    "genres": [
+      "Sci-Fi",
+      "Thriller",
+      "Drama"
+    ],
+    "rating": 9.1,
+    "episodes": "24 episodes",
+    "synopsis": "Mahasiswa eksentrik Rintaro Okabe tanpa sengaja menemukan cara mengirim pesan ke masa lalu. Setiap perubahan kecil memicu konsekuensi besar yang memaksanya menanggung beban garis waktu.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/5/73199.jpg",
+    "cast": [
+      "Mamoru Miyano",
+      "Asami Imai",
+      "Kana Hanazawa",
+      "Tomokazu Seki"
+    ]
+  },
+  {
+    "id": 9,
+    "title": "One Punch Man",
+    "year": 2015,
+    "studio": "Madhouse",
+    "genres": [
+      "Action",
+      "Comedy",
+      "Parody"
+    ],
+    "rating": 8.5,
+    "episodes": "12 episodes",
+    "synopsis": "Saitama, pahlawan yang bisa mengalahkan musuh apa pun dengan satu pukulan, justru bosan karena tak ada lawan yang sepadan. Ia mencari tantangan nyata sambil menjalani hidup sehari-hari.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/12/76049.jpg",
+    "cast": [
+      "Makoto Furukawa",
+      "Kaito Ishikawa",
+      "Hiroki Yasumoto",
+      "Yuki Kaji"
+    ]
+  },
+  {
+    "id": 10,
+    "title": "Hunter x Hunter (2011)",
+    "year": 2011,
+    "studio": "Madhouse",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Fantasy"
+    ],
+    "rating": 9.0,
+    "episodes": "148 episodes",
+    "synopsis": "Gon Freecss, bocah 12 tahun, menjadi Hunter untuk mencari ayahnya. Dalam perjalanannya ia bersahabat dengan Killua, Kurapika, dan Leorio sambil menghadapi bahaya yang kian besar.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1337/99013.jpg",
+    "cast": [
+      "Megumi Han",
+      "Mariya Ise",
+      "Miyuki Sawashiro",
+      "Keiji Fujiwara"
+    ]
+  },
+  {
+    "id": 11,
+    "title": "Jujutsu Kaisen",
+    "year": 2020,
+    "studio": "MAPPA",
+    "genres": [
+      "Action",
+      "Supernatural",
+      "Fantasy"
+    ],
+    "rating": 8.6,
+    "episodes": "24 episodes",
+    "synopsis": "Yuji Itadori menelan jari terkutuk demi menyelamatkan temannya dan menjadi wadah bagi raja kutukan Sukuna. Ia pun bergabung dengan sekolah jujutsu untuk melawan kutukan jahat.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
+    "cast": [
+      "Junya Enoki",
+      "Yuma Uchida",
+      "Asami Seto",
+      "Yuichi Nakamura"
+    ]
+  },
+  {
+    "id": 12,
+    "title": "Frieren: Beyond Journey's End",
+    "year": 2023,
+    "studio": "Madhouse",
+    "genres": [
+      "Adventure",
+      "Drama",
+      "Fantasy"
+    ],
+    "rating": 9.3,
+    "episodes": "28 episodes",
+    "synopsis": "Setelah mengalahkan Raja Iblis, penyihir elf Frieren menyadari betapa singkatnya hidup rekan-rekan manusianya. Ia memulai perjalanan baru untuk memahami arti hubungan dan waktu.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1015/138006.jpg",
+    "cast": [
+      "Atsumi Tanezaki",
+      "Kana Ichinose",
+      "Chiaki Kobayashi",
+      "Mallorie Rodak"
+    ]
+  },
+  {
+    "id": 13,
+    "title": "Violet Evergarden",
+    "year": 2018,
+    "studio": "Kyoto Animation",
+    "genres": [
+      "Drama",
+      "Fantasy",
+      "Slice of Life"
+    ],
+    "rating": 8.5,
+    "episodes": "13 episodes",
+    "synopsis": "Mantan prajurit Violet Evergarden bekerja sebagai penulis surat pengganti sambil mencari arti kata terakhir yang diucapkan komandannya: \"aku mencintaimu\".",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1795/95088.jpg",
+    "cast": [
+      "Yui Ishikawa",
+      "Daisuke Namikawa",
+      "Takehito Koyasu",
+      "Minori Chihara"
+    ]
+  },
+  {
+    "id": 14,
+    "title": "Code Geass: Lelouch of the Rebellion",
+    "year": 2006,
+    "studio": "Sunrise",
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Drama"
+    ],
+    "rating": 8.7,
+    "episodes": "25 episodes",
+    "synopsis": "Pangeran buangan Lelouch memperoleh kekuatan Geass yang membuat siapa pun menuruti perintahnya. Ia memimpin pemberontakan terhadap Kekaisaran Britannia demi dunia yang lebih baik bagi adiknya.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/5/50331.jpg",
+    "cast": [
+      "Jun Fukuyama",
+      "Takahiro Sakurai",
+      "Ami Koshimizu",
+      "Kaori Nazuka"
+    ]
+  },
+  {
+    "id": 15,
+    "title": "Vinland Saga",
+    "year": 2019,
+    "studio": "Wit Studio",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama"
+    ],
+    "rating": 8.7,
+    "episodes": "24 episodes",
+    "synopsis": "Thorfinn, pemuda Viking, bergabung dengan pasukan pembunuh ayahnya demi membalas dendam. Perjalanan penuh perang itu perlahan membuatnya mempertanyakan arti kekuatan dan kedamaian.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1500/103005.jpg",
+    "cast": [
+      "Yuto Uemura",
+      "Takehito Koyasu",
+      "Akio Otsuka",
+      "Aoi Yuki"
+    ]
+  },
+  {
+    "id": 16,
+    "title": "Mob Psycho 100",
+    "year": 2016,
+    "studio": "Bones",
+    "genres": [
+      "Action",
+      "Comedy",
+      "Supernatural"
+    ],
+    "rating": 8.5,
+    "episodes": "12 episodes",
+    "synopsis": "Shigeo \"Mob\" Kageyama, pelajar SMP dengan kekuatan psikis luar biasa, berusaha hidup normal sambil menekan emosinya agar kekuatan itu tidak meledak tak terkendali.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/8/80356.jpg",
+    "cast": [
+      "Setsuo Ito",
+      "Takahiro Sakurai",
+      "Kane Kosugi",
+      "Miyu Irino"
+    ]
+  },
+  {
+    "id": 17,
+    "title": "Haikyu!!",
+    "year": 2014,
+    "studio": "Production I.G",
+    "genres": [
+      "Sports",
+      "Comedy",
+      "Drama"
+    ],
+    "rating": 8.7,
+    "episodes": "25 episodes",
+    "synopsis": "Shoyo Hinata, pemain voli bertubuh pendek yang bermimpi menjadi sang \"raksasa kecil\", bergabung dengan tim SMA Karasuno dan bersaing bersama rival lamanya, Tobio Kageyama.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/7/76014.jpg",
+    "cast": [
+      "Ayumu Murase",
+      "Kaito Ishikawa",
+      "Satoshi Hino",
+      "Yuki Kaji"
+    ]
+  },
+  {
+    "id": 18,
+    "title": "Neon Genesis Evangelion",
+    "year": 1995,
+    "studio": "Gainax",
+    "genres": [
+      "Action",
+      "Sci-Fi",
+      "Psychological"
+    ],
+    "rating": 8.3,
+    "episodes": "26 episodes",
+    "synopsis": "Shinji Ikari dipaksa mengendalikan robot raksasa Eva untuk melawan makhluk misterius bernama Angel, sambil bergulat dengan trauma, kesepian, dan hubungan antarmanusia.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1314/108941.jpg",
+    "cast": [
+      "Megumi Ogata",
+      "Megumi Hayashibara",
+      "Kotono Mitsuishi",
+      "Yuriko Yamaguchi"
+    ]
+  },
+  {
+    "id": 19,
+    "title": "Made in Abyss",
+    "year": 2017,
+    "studio": "Kinema Citrus",
+    "genres": [
+      "Adventure",
+      "Fantasy",
+      "Mystery"
+    ],
+    "rating": 8.7,
+    "episodes": "13 episodes",
+    "synopsis": "Riko, gadis yatim yang bercita-cita menjadi penjelajah, turun ke jurang raksasa penuh misteri bersama robot bocah bernama Reg untuk mencari ibunya yang menghilang.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/6/86733.jpg",
+    "cast": [
+      "Miyu Tomita",
+      "Mariya Ise",
+      "Mutsumi Tamura",
+      "Shiori Izawa"
+    ]
+  },
+  {
+    "id": 20,
+    "title": "Spy x Family",
+    "year": 2022,
+    "studio": "Wit Studio",
+    "genres": [
+      "Action",
+      "Comedy",
+      "Slice of Life"
+    ],
+    "rating": 8.6,
+    "episodes": "25 episodes",
+    "synopsis": "Mata-mata Twilight harus membangun keluarga palsu demi misi rahasia, tanpa tahu bahwa putri angkatnya seorang telepat dan istrinya adalah pembunuh bayaran.",
+    "poster_url": "https://cdn.myanimelist.net/images/anime/1441/122795.jpg",
+    "cast": [
+      "Takuya Eguchi",
+      "Atsumi Tanezaki",
+      "Saori Hayami",
+      "Ryuichi Kijima"
+    ]
+  }
+]
