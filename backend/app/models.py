@@ -62,6 +62,7 @@ class Anime(Base):
     studio: Mapped[str] = mapped_column(String(255))
     rating: Mapped[float] = mapped_column(Float)
     episodes: Mapped[str] = mapped_column(String(50))
+    total_episodes: Mapped[int] = mapped_column(Integer)
     synopsis: Mapped[str] = mapped_column(Text)
     poster_url: Mapped[str] = mapped_column(Text)
     # The cast list is only displayed, never queried, so a JSON column is enough.
@@ -107,4 +108,19 @@ class Review(Base):
     review: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
+    anime: Mapped["Anime"] = relationship(lazy="joined")
+    
+class Watch_Progress(Base):
+    __tablename__ = "watch_progress"
+    __table_args__ = (
+        UniqueConstraint("user_id", "anime_id", name="uq_progress_user_anime"),
+        CheckConstraint("current_episode >= 0", name="ck_progress_episode_not_negative"),
+        CheckConstraint("status IN ('watching', 'completed', 'on_hold', 'dropped')", name="ck_progress_status"),
+    )
+    id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    anime_id: Mapped[int] = mapped_column(ForeignKey("animes.id", ondelete="CASCADE"), index=True)
+    status: Mapped[str] = mapped_column(String(20))
+    current_episode: Mapped[int] = mapped_column(Integer, default=0)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
     anime: Mapped["Anime"] = relationship(lazy="joined")

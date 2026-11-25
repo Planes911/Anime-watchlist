@@ -12,6 +12,10 @@ PROTECTED = [
     ("DELETE", "/api/watchlist/1"),
     ("GET", "/api/watched"),
     ("POST", "/api/watched"),
+    ("GET", "/api/progress"), 
+    ("PUT", "/api/progress/1"), 
+    ("DELETE", "/api/progress/1"), 
+    ("GET", "/api/recommendations"),
 ]
 BODY = {"animeId": 1, "rating": 5, "review": "bagus"}
 

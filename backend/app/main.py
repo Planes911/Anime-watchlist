@@ -4,7 +4,7 @@ from fastapi import FastAPI
 
 from app.config import get_settings
 from app.errors import register_exception_handlers
-from app.routers import anime, auth, watchlist, watched
+from app.routers import anime, auth, watchlist, watched, progress, recommendations
 
 # Fails fast at startup if required settings (e.g. JWT_SECRET) are missing.
 settings = get_settings()
@@ -23,6 +23,8 @@ app.include_router(auth.router)
 app.include_router(anime.router)
 app.include_router(watchlist.router)
 app.include_router(watched.router)
+app.include_router(progress.router)
+app.include_router(recommendations.router)
 
 @app.get("/api/health", tags=["Meta"])
 def health():

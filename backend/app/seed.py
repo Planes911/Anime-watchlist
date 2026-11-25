@@ -1,22 +1,15 @@
-"""
-Create the database tables and seed the initial animes.
-
-Run from the backend/ folder:  python -m app.seed
-Safe to run repeatedly (idempotent): animes that already exist are skipped.
-"""
+"""Create the database tables and seed the initial animes."""
 
 import json
 import os
-from pathlib import Path
 
+from pathlib import Path
 from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
-
 from app.models import Genre, Anime
 from app.database import Base, engine, SessionLocal
 
 def find_animes_json() -> Path:
-    """Locate anime.json: env override first, then backend/data/, then <repo>/data/."""
     here = Path(__file__).resolve()
     candidates = [
         os.environ.get("ANIME_JSON_PATH"),
@@ -29,15 +22,10 @@ def find_animes_json() -> Path:
     raise FileNotFoundError("anime.json tidak ditemukan. Set ANIME_JSON_PATH atau letakkan di <repo>/data/.")
 
 def load_animes_json(path: Path | None = None) -> list[dict]:
-    """Read the seed animes from the JSON file shipped with the starter pack."""
     with open(path or find_animes_json(), encoding="utf-8") as f:
         return json.load(f)
     
 def seed_animes(db: Session, animes: list[dict]):
-    """Insert the animes that are not in the database yet.
-
-    Returns the number of newly created animes (0 when everything already exists).
-    """
     existing_ids = set(db.scalars(select(Anime.id)).all())
     # Cache genres by name so each genre row is created only once.
     genre_cache = {g.name: g for g in db.scalars(select(Genre)).all()}
@@ -57,7 +45,7 @@ def seed_animes(db: Session, animes: list[dict]):
         db.add(
             Anime(
                 id=item["id"], title=item["title"], year=item["year"], studio=item["studio"],
-                rating=item["rating"], episodes=item["episodes"], synopsis=item["synopsis"],
+                rating=item["rating"], episodes=item["episodes"], total_episodes=item["total_episodes"], synopsis=item["synopsis"],
                 poster_url=item["poster_url"], cast_members=item["cast"], genres=genres,
             )
         )
@@ -66,11 +54,6 @@ def seed_animes(db: Session, animes: list[dict]):
     return created
 
 def sync_postgres_sequence(db: Session) -> None:
-    """Align PostgreSQL's id sequence with the seeded rows.
-
-    Seeding inserts explicit ids (1..N), which does not advance the sequence; without
-    this, the next auto-generated id would collide with an existing primary key.
-    """
     if db.get_bind().dialect.name == "postgresql":
         db.execute(text(
             "SELECT setval(pg_get_serial_sequence('animes', 'id'), COALESCE((SELECT MAX(id) FROM animes), 1))"
@@ -78,7 +61,6 @@ def sync_postgres_sequence(db: Session) -> None:
         db.commit()
         
 def main() -> None:
-    """Create missing tables, then seed the animes."""
     # create_all only creates missing tables and never alters existing ones. For schema changes in
     # production, use a migration tool such as Alembic.
     Base.metadata.create_all(engine)

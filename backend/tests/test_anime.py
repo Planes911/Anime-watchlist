@@ -7,7 +7,7 @@ def test_list_animes_returns_seeded_20_with_contract_shape(client):
     assert len(animes) == 20
     first = animes[0]
     assert set(first) == {"id", "title", "year", "studio", "genres", "rating",
-                          "episodes", "synopsis", "poster_url", "cast"}
+                          "episodes", "synopsis", "poster_url", "cast", "total_episodes"}
     assert isinstance(first["genres"], list) and isinstance(first["cast"], list)
 
 
