@@ -1,0 +1,3285 @@
+{
+  "auth": {
+    "bearer": [
+      {
+        "key": "token",
+        "type": "string",
+        "value": "{{token}}"
+      }
+    ],
+    "type": "bearer"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "exec": [
+          ""
+        ],
+        "packages": {},
+        "requests": {},
+        "type": "text/javascript"
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "exec": [
+          ""
+        ],
+        "packages": {},
+        "requests": {},
+        "type": "text/javascript"
+      }
+    }
+  ],
+  "info": {
+    "_collection_link": "https://go.postman.co/collection/60391805-45d32bc4-dd37-4228-a1fb-69f2f999ebfd?source=collection_link",
+    "_exporter_id": "60391805",
+    "_postman_id": "45d32bc4-dd37-4228-a1fb-69f2f999ebfd",
+    "description": "REST API watchlist & review anime dengan rekomendasi Gemini (grounded ke database lokal).",
+    "name": "AnimeLog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "item": [
+        {
+          "item": [
+            {
+              "item": [
+                {
+                  "event": [
+                    {
+                      "listen": "prerequest",
+                      "script": {
+                        "exec": [
+                          "pm.environment.set(\"email\", `andi${Date.now()}@mail.com`);"
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "name": "Register",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"username\": \"andi\",\n  \"email\": \"andi@mail.com\",\n  \"password\": \"rahasia123\"\n}"
+                    },
+                    "description": "Create a new account. Answers 409 if the email is already registered.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "register"
+                      ],
+                      "raw": "{{baseUrl}}/api/auth/register"
+                    }
+                  },
+                  "response": [
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"id\": 8285,\n  \"username\": \"string\",\n  \"email\": \"string\",\n  \"created_at\": \"1953-01-20T01:56:00.288Z\"\n}",
+                      "code": 201,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "body": {
+                          "mode": "raw",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          },
+                          "raw": "{\n  \"username\": \"string\",\n  \"email\": \"08HCQV@tLXZrhPlbiQl.ak\",\n  \"password\": \"stringstring\"\n}"
+                        },
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "register"
+                          ],
+                          "raw": "{{baseUrl}}/api/auth/register"
+                        }
+                      },
+                      "status": "Created"
+                    },
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "code": 422,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "body": {
+                          "mode": "raw",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          },
+                          "raw": "{\n  \"username\": \"string\",\n  \"email\": \"08HCQV@tLXZrhPlbiQl.ak\",\n  \"password\": \"stringstring\"\n}"
+                        },
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "register"
+                          ],
+                          "raw": "{{baseUrl}}/api/auth/register"
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                    }
+                  ]
+                }
+              ],
+              "name": "register"
+            },
+            {
+              "item": [
+                {
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Login berhasil\", () => pm.response.to.have.status(200));\r",
+                          "\r",
+                          "const body = pm.response.json();\r",
+                          "pm.environment.set(\"token\", body.token);"
+                        ],
+                        "packages": {},
+                        "requests": {},
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "name": "Login",
+                  "request": {
+                    "auth": {
+                      "type": "noauth"
+                    },
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"email\": \"andi@mail.com\",\n  \"password\": \"rahasia123\"\n}"
+                    },
+                    "description": "Verify credentials and return a JWT together with the user's public profile.",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "auth",
+                        "login"
+                      ],
+                      "raw": "{{baseUrl}}/api/auth/login"
+                    }
+                  },
+                  "response": [
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"token\": \"string\",\n  \"user\": {\n    \"id\": 9953,\n    \"username\": \"string\",\n    \"email\": \"string\",\n    \"created_at\": \"1999-03-13T02:41:09.910Z\"\n  },\n  \"token_type\": \"bearer\"\n}",
+                      "code": 200,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "body": {
+                          "mode": "raw",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          },
+                          "raw": "{\n  \"email\": \"kfE6@ggOdQztfpWVzIGMHTawyE.qgnh\",\n  \"password\": \"stringstring\"\n}"
+                        },
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "login"
+                          ],
+                          "raw": "{{baseUrl}}/api/auth/login"
+                        }
+                      },
+                      "status": "OK"
+                    },
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "code": 422,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "body": {
+                          "mode": "raw",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          },
+                          "raw": "{\n  \"email\": \"kfE6@ggOdQztfpWVzIGMHTawyE.qgnh\",\n  \"password\": \"stringstring\"\n}"
+                        },
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "POST",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "auth",
+                            "login"
+                          ],
+                          "raw": "{{baseUrl}}/api/auth/login"
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                    }
+                  ]
+                }
+              ],
+              "name": "login"
+            }
+          ],
+          "name": "auth"
+        },
+        {
+          "item": [
+            {
+              "item": [
+                {
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\n\nconst anime = pm.response.json();\npm.test(\"Berisi anime\", () => pm.expect(anime).to.be.an(\"object\").that.is.not.empty);\n\nif (anime.id) {\n    pm.environment.set(\"animeId\", anime.id);\n}"
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "name": "Get Anime",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      },
+                      "raw": ""
+                    },
+                    "description": "Return a single anime, or 404 if it does not exist.",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "anime",
+                        " {{animeid}}"
+                      ],
+                      "raw": "{{baseUrl}}/api/anime/ {{animeid}}"
+                    }
+                  },
+                  "response": [
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"id\": 668,\n  \"title\": \"string\",\n  \"year\": 4881,\n  \"studio\": \"string\",\n  \"genres\": [\n    \"string\",\n    \"string\"\n  ],\n  \"rating\": 1554.4038920227642,\n  \"episodes\": \"string\",\n  \"synopsis\": \"string\",\n  \"poster_url\": \"string\",\n  \"cast\": [\n    \"string\",\n    \"string\"\n  ],\n  \"total_episodes\": 3525\n}",
+                      "code": 200,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "anime",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/anime/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK"
+                    },
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "code": 422,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "method": "GET",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "anime",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/anime/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                    }
+                  ]
+                }
+              ],
+              "name": "{anime_id}"
+            },
+            {
+              "name": "List Animes",
+              "request": {
+                "description": "List animes. Optional filters: genre (case-insensitive), search (title or studio), shuffle.",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "anime"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter genre, mis. Sci-Fi",
+                      "key": "genre",
+                      "value": "string"
+                    },
+                    {
+                      "description": "Cari di judul / studio",
+                      "key": "search",
+                      "value": "string"
+                    },
+                    {
+                      "description": "Acak urutan hasil",
+                      "key": "shuffle",
+                      "value": "false"
+                    }
+                  ],
+                  "raw": "{{baseUrl}}/api/anime?genre=string&search=string&shuffle=false"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "[\n  {\n    \"id\": 3163,\n    \"title\": \"string\",\n    \"year\": 2351,\n    \"studio\": \"string\",\n    \"genres\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": 3922.801332325423,\n    \"episodes\": \"string\",\n    \"synopsis\": \"string\",\n    \"poster_url\": \"string\",\n    \"cast\": [\n      \"string\",\n      \"string\"\n    ],\n    \"total_episodes\": 1759\n  },\n  {\n    \"id\": 8796,\n    \"title\": \"string\",\n    \"year\": 6811,\n    \"studio\": \"string\",\n    \"genres\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": 5539.320763644995,\n    \"episodes\": \"string\",\n    \"synopsis\": \"string\",\n    \"poster_url\": \"string\",\n    \"cast\": [\n      \"string\",\n      \"string\"\n    ],\n    \"total_episodes\": 3926\n  }\n]",
+                  "code": 200,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "anime"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter genre, mis. Sci-Fi",
+                          "key": "genre",
+                          "value": "string"
+                        },
+                        {
+                          "description": "Cari di judul / studio",
+                          "key": "search",
+                          "value": "string"
+                        },
+                        {
+                          "description": "Acak urutan hasil",
+                          "key": "shuffle",
+                          "value": "false"
+                        }
+                      ],
+                      "raw": "{{baseUrl}}/api/anime?genre=string&search=string&shuffle=false"
+                    }
+                  },
+                  "status": "OK"
+                },
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "code": 422,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "anime"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter genre, mis. Sci-Fi",
+                          "key": "genre",
+                          "value": "string"
+                        },
+                        {
+                          "description": "Cari di judul / studio",
+                          "key": "search",
+                          "value": "string"
+                        },
+                        {
+                          "description": "Acak urutan hasil",
+                          "key": "shuffle",
+                          "value": "false"
+                        }
+                      ],
+                      "raw": "{{baseUrl}}/api/anime?genre=string&search=string&shuffle=false"
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                }
+              ]
+            }
+          ],
+          "name": "anime"
+        },
+        {
+          "item": [
+            {
+              "item": [
+                {
+                  "name": "Remove From Watchlist",
+                  "request": {
+                    "auth": {
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "type": "string",
+                          "value": "{{bearerToken}}"
+                        }
+                      ],
+                      "type": "bearer"
+                    },
+                    "description": "Remove a anime from the current user's watchlist.",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "DELETE",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watchlist",
+                        ":anime_id"
+                      ],
+                      "raw": "{{baseUrl}}/api/watchlist/:anime_id",
+                      "variable": [
+                        {
+                          "key": "anime_id",
+                          "value": "4140"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"message\": \"string\"\n}",
+                      "code": 200,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "watchlist",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/watchlist/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK"
+                    },
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "code": 422,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "watchlist",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/watchlist/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                    }
+                  ]
+                }
+              ],
+              "name": "{anime_id}"
+            },
+            {
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "name": "Get Watchlist",
+              "request": {
+                "description": "Return the current user's watchlist, newest first.",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watchlist"
+                  ],
+                  "raw": "{{baseUrl}}/api/watchlist"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "[\n  {\n    \"id\": 5335,\n    \"anime_id\": 1764,\n    \"created_at\": \"1966-12-26T13:01:16.292Z\",\n    \"anime\": {\n      \"id\": 2920,\n      \"title\": \"string\",\n      \"year\": 4235,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 7275.985253428624,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 5774\n    }\n  },\n  {\n    \"id\": 5785,\n    \"anime_id\": 3386,\n    \"created_at\": \"1975-03-22T18:38:33.105Z\",\n    \"anime\": {\n      \"id\": 1609,\n      \"title\": \"string\",\n      \"year\": 3298,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 1689.3973736284972,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 2698\n    }\n  }\n]",
+                  "code": 200,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watchlist"
+                      ],
+                      "raw": "{{baseUrl}}/api/watchlist"
+                    }
+                  },
+                  "status": "OK"
+                }
+              ]
+            },
+            {
+              "name": "Add To Watchlist",
+              "request": {
+                "auth": {
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "type": "string",
+                      "value": "{{bearerToken}}"
+                    }
+                  ],
+                  "type": "bearer"
+                },
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\n  \"animeId\": 4775\n}"
+                },
+                "description": "Add a anime to the current user's watchlist (404 unknown anime, 409 duplicate).",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watchlist"
+                  ],
+                  "raw": "{{baseUrl}}/api/watchlist"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"id\": 5620,\n  \"anime_id\": 4801,\n  \"created_at\": \"1959-09-18T13:48:03.872Z\",\n  \"anime\": {\n    \"id\": 4236,\n    \"title\": \"string\",\n    \"year\": 3447,\n    \"studio\": \"string\",\n    \"genres\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": 5710.009121722468,\n    \"episodes\": \"string\",\n    \"synopsis\": \"string\",\n    \"poster_url\": \"string\",\n    \"cast\": [\n      \"string\",\n      \"string\"\n    ],\n    \"total_episodes\": 1745\n  }\n}",
+                  "code": 201,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"animeId\": 4775\n}"
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watchlist"
+                      ],
+                      "raw": "{{baseUrl}}/api/watchlist"
+                    }
+                  },
+                  "status": "Created"
+                },
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "code": 422,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"animeId\": 4775\n}"
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watchlist"
+                      ],
+                      "raw": "{{baseUrl}}/api/watchlist"
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                }
+              ]
+            },
+            {
+              "name": "Add To Watchlist Copy",
+              "request": {
+                "auth": {
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "type": "string",
+                      "value": "{{bearerToken}}"
+                    }
+                  ],
+                  "type": "bearer"
+                },
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\n  \"animeId\": 4775\n}"
+                },
+                "description": "Add a anime to the current user's watchlist (404 unknown anime, 409 duplicate).",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watchlist"
+                  ],
+                  "raw": "{{baseUrl}}/api/watchlist"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"id\": 5620,\n  \"anime_id\": 4801,\n  \"created_at\": \"1959-09-18T13:48:03.872Z\",\n  \"anime\": {\n    \"id\": 4236,\n    \"title\": \"string\",\n    \"year\": 3447,\n    \"studio\": \"string\",\n    \"genres\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": 5710.009121722468,\n    \"episodes\": \"string\",\n    \"synopsis\": \"string\",\n    \"poster_url\": \"string\",\n    \"cast\": [\n      \"string\",\n      \"string\"\n    ],\n    \"total_episodes\": 1745\n  }\n}",
+                  "code": 201,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"animeId\": 4775\n}"
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watchlist"
+                      ],
+                      "raw": "{{baseUrl}}/api/watchlist"
+                    }
+                  },
+                  "status": "Created"
+                },
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "code": 422,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"animeId\": 4775\n}"
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watchlist"
+                      ],
+                      "raw": "{{baseUrl}}/api/watchlist"
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                }
+              ]
+            }
+          ],
+          "name": "watchlist"
+        },
+        {
+          "item": [
+            {
+              "name": "List Watched",
+              "request": {
+                "auth": {
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "type": "string",
+                      "value": "{{bearerToken}}"
+                    }
+                  ],
+                  "type": "bearer"
+                },
+                "description": "Return the current user's watched animes, newest first.",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watched"
+                  ],
+                  "raw": "{{baseUrl}}/api/watched"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "[\n  {\n    \"id\": 4667,\n    \"anime_id\": 2258,\n    \"rating\": 6601,\n    \"review\": \"string\",\n    \"created_at\": \"1982-08-23T04:53:45.959Z\",\n    \"anime\": {\n      \"id\": 8632,\n      \"title\": \"string\",\n      \"year\": 4992,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 5932.933851777962,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 7367\n    }\n  },\n  {\n    \"id\": 5257,\n    \"anime_id\": 6572,\n    \"rating\": 2665,\n    \"review\": \"string\",\n    \"created_at\": \"2024-02-07T08:01:48.649Z\",\n    \"anime\": {\n      \"id\": 3753,\n      \"title\": \"string\",\n      \"year\": 6358,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 4836.2970348095605,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 3775\n    }\n  }\n]",
+                  "code": 200,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watched"
+                      ],
+                      "raw": "{{baseUrl}}/api/watched"
+                    }
+                  },
+                  "status": "OK"
+                }
+              ]
+            },
+            {
+              "name": "Log Watched",
+              "request": {
+                "auth": {
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "type": "string",
+                      "value": "{{bearerToken}}"
+                    }
+                  ],
+                  "type": "bearer"
+                },
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\n  \"animeId\": 8533,\n  \"rating\": 2,\n  \"review\": \"string\"\n}"
+                },
+                "description": "Record that the current user watched a anime, with a 1-5 rating and a review.",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watched"
+                  ],
+                  "raw": "{{baseUrl}}/api/watched"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"id\": 7739,\n  \"anime_id\": 5432,\n  \"rating\": 4255,\n  \"review\": \"string\",\n  \"created_at\": \"2018-02-12T10:30:37.915Z\",\n  \"anime\": {\n    \"id\": 5238,\n    \"title\": \"string\",\n    \"year\": 2224,\n    \"studio\": \"string\",\n    \"genres\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": 1939.1568621713795,\n    \"episodes\": \"string\",\n    \"synopsis\": \"string\",\n    \"poster_url\": \"string\",\n    \"cast\": [\n      \"string\",\n      \"string\"\n    ],\n    \"total_episodes\": 1126\n  }\n}",
+                  "code": 201,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"animeId\": 8533,\n  \"rating\": 2,\n  \"review\": \"string\"\n}"
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watched"
+                      ],
+                      "raw": "{{baseUrl}}/api/watched"
+                    }
+                  },
+                  "status": "Created"
+                },
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "code": 422,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\n  \"animeId\": 8533,\n  \"rating\": 2,\n  \"review\": \"string\"\n}"
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "POST",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "watched"
+                      ],
+                      "raw": "{{baseUrl}}/api/watched"
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                }
+              ]
+            }
+          ],
+          "name": "watched"
+        },
+        {
+          "item": [
+            {
+              "item": [
+                {
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\npm.test(\"Progress tersimpan\", () => {\n    const p = pm.response.json();\n    pm.expect(p.status).to.eql(\"watching\");\n    pm.expect(p.current_episode).to.eql(3);\n});"
+                        ],
+                        "type": "text/javascript"
+                      }
+                    }
+                  ],
+                  "name": "Set Progress",
+                  "request": {
+                    "body": {
+                      "mode": "raw",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      },
+                      "raw": "{\"status\": \"watching\", \"currentEpisode\": 3}"
+                    },
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "PUT",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "progress",
+                        "{{animeId}}"
+                      ],
+                      "raw": "{{baseUrl}}/api/progress/{{animeId}}"
+                    }
+                  },
+                  "response": [
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"id\": 1178,\n  \"anime_id\": 7621,\n  \"status\": \"string\",\n  \"current_episode\": 3187,\n  \"total_episodes\": 4523,\n  \"updated_at\": \"2013-01-21T11:58:52.825Z\",\n  \"anime\": {\n    \"id\": 9218,\n    \"title\": \"string\",\n    \"year\": 3322,\n    \"studio\": \"string\",\n    \"genres\": [\n      \"string\",\n      \"string\"\n    ],\n    \"rating\": 1568.8273835203624,\n    \"episodes\": \"string\",\n    \"synopsis\": \"string\",\n    \"poster_url\": \"string\",\n    \"cast\": [\n      \"string\",\n      \"string\"\n    ],\n    \"total_episodes\": 8831\n  }\n}",
+                      "code": 200,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "body": {
+                          "mode": "raw",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          },
+                          "raw": "{\n  \"status\": \"on_hold\",\n  \"currentEpisode\": 1701\n}"
+                        },
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "PUT",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "progress",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/progress/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK"
+                    },
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "code": 422,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "body": {
+                          "mode": "raw",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          },
+                          "raw": "{\n  \"status\": \"on_hold\",\n  \"currentEpisode\": 1701\n}"
+                        },
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "PUT",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "progress",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/progress/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                    }
+                  ]
+                },
+                {
+                  "name": "Delete Progress",
+                  "request": {
+                    "auth": {
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "type": "string",
+                          "value": "{{bearerToken}}"
+                        }
+                      ],
+                      "type": "bearer"
+                    },
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "DELETE",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "progress",
+                        ":anime_id"
+                      ],
+                      "raw": "{{baseUrl}}/api/progress/:anime_id",
+                      "variable": [
+                        {
+                          "key": "anime_id",
+                          "value": "4140"
+                        }
+                      ]
+                    }
+                  },
+                  "response": [
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"message\": \"string\"\n}",
+                      "code": 200,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Successful Response",
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "progress",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/progress/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK"
+                    },
+                    {
+                      "_postman_previewlanguage": "json",
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                      "code": 422,
+                      "cookie": [],
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "method": "DELETE",
+                        "url": {
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "progress",
+                            ":anime_id"
+                          ],
+                          "raw": "{{baseUrl}}/api/progress/:anime_id",
+                          "variable": [
+                            {
+                              "key": "anime_id",
+                              "value": "4140"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                    }
+                  ]
+                }
+              ],
+              "name": "{anime_id}"
+            },
+            {
+              "name": "List Progress",
+              "request": {
+                "auth": {
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "type": "string",
+                      "value": "{{bearerToken}}"
+                    }
+                  ],
+                  "type": "bearer"
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "progress"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter: watching, completed, on_hold, dropped",
+                      "key": "status",
+                      "value": "watching"
+                    }
+                  ],
+                  "raw": "{{baseUrl}}/api/progress?status=watching"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "[\n  {\n    \"id\": 9439,\n    \"anime_id\": 6781,\n    \"status\": \"string\",\n    \"current_episode\": 673,\n    \"total_episodes\": 2125,\n    \"updated_at\": \"1959-03-17T09:50:43.419Z\",\n    \"anime\": {\n      \"id\": 8805,\n      \"title\": \"string\",\n      \"year\": 6969,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 3595.9013766600347,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 152\n    }\n  },\n  {\n    \"id\": 4744,\n    \"anime_id\": 1487,\n    \"status\": \"string\",\n    \"current_episode\": 7773,\n    \"total_episodes\": 7777,\n    \"updated_at\": \"1959-09-04T00:13:50.114Z\",\n    \"anime\": {\n      \"id\": 6690,\n      \"title\": \"string\",\n      \"year\": 5179,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 2143.502451126578,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 8734\n    }\n  }\n]",
+                  "code": 200,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "progress"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter: watching, completed, on_hold, dropped",
+                          "key": "status",
+                          "value": "watching"
+                        }
+                      ],
+                      "raw": "{{baseUrl}}/api/progress?status=watching"
+                    }
+                  },
+                  "status": "OK"
+                },
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "code": 422,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "progress"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter: watching, completed, on_hold, dropped",
+                          "key": "status",
+                          "value": "watching"
+                        }
+                      ],
+                      "raw": "{{baseUrl}}/api/progress?status=watching"
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                }
+              ]
+            }
+          ],
+          "name": "progress"
+        },
+        {
+          "item": [
+            {
+              "name": "Get Recommendations",
+              "request": {
+                "auth": {
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "type": "string",
+                      "value": "{{bearerToken}}"
+                    }
+                  ],
+                  "type": "bearer"
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "recommendations"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maksimal jumlah rekomendasi",
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "raw": "{{baseUrl}}/api/recommendations?limit=5"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "[\n  {\n    \"anime\": {\n      \"id\": 9009,\n      \"title\": \"string\",\n      \"year\": 8776,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 7430.373121666208,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 2130\n    },\n    \"score\": 6798.146808513345,\n    \"reason\": \"string\"\n  },\n  {\n    \"anime\": {\n      \"id\": 5037,\n      \"title\": \"string\",\n      \"year\": 3513,\n      \"studio\": \"string\",\n      \"genres\": [\n        \"string\",\n        \"string\"\n      ],\n      \"rating\": 9439.943055102314,\n      \"episodes\": \"string\",\n      \"synopsis\": \"string\",\n      \"poster_url\": \"string\",\n      \"cast\": [\n        \"string\",\n        \"string\"\n      ],\n      \"total_episodes\": 2737\n    },\n    \"score\": 1499.778567355048,\n    \"reason\": \"string\"\n  }\n]",
+                  "code": 200,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recommendations"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maksimal jumlah rekomendasi",
+                          "key": "limit",
+                          "value": "5"
+                        }
+                      ],
+                      "raw": "{{baseUrl}}/api/recommendations?limit=5"
+                    }
+                  },
+                  "status": "OK"
+                },
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        1245\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+                  "code": 422,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "recommendations"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maksimal jumlah rekomendasi",
+                          "key": "limit",
+                          "value": "5"
+                        }
+                      ],
+                      "raw": "{{baseUrl}}/api/recommendations?limit=5"
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)"
+                }
+              ]
+            }
+          ],
+          "name": "recommendations"
+        },
+        {
+          "item": [
+            {
+              "name": "Health",
+              "request": {
+                "description": "Lightweight liveness probe (does not touch the database).",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "health"
+                  ],
+                  "raw": "{{baseUrl}}/api/health"
+                }
+              },
+              "response": [
+                {
+                  "_postman_previewlanguage": "json",
+                  "body": "",
+                  "code": 200,
+                  "cookie": [],
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "name": "Successful Response",
+                  "originalRequest": {
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "method": "GET",
+                    "url": {
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "health"
+                      ],
+                      "raw": "{{baseUrl}}/api/health"
+                    }
+                  },
+                  "status": "OK"
+                }
+              ]
+            }
+          ],
+          "name": "health"
+        }
+      ],
+      "name": "api"
+    },
+    {
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Cleanup: remove watchlist entry for animeId before the run\n// so \"Add To Watchlist\" always starts fresh and won't get a 409.\nconst baseUrl = pm.environment.get(\"baseUrl\");\nconst token   = pm.environment.get(\"token\");\nconst animeId = pm.environment.get(\"animeId\");\n\nif (baseUrl && token && animeId) {\n    pm.sendRequest({\n        url:    `${baseUrl}/api/watchlist/${animeId}`,\n        method: \"DELETE\",\n        header: {\n            \"Authorization\": `Bearer ${token}`,\n            \"Accept\":        \"application/json\"\n        }\n    }, function (err, res) {\n        // 200/204 = deleted, 404 = wasn't there — both are fine\n        console.log(\"[Cleanup] DELETE watchlist/\" + animeId + \" →\", res ? res.status() : err);\n    });\n\n    // Cleanup: remove watched log for animeId before the run\n    // so \"Log Watched\" always starts fresh and won't get a 409.\n    pm.sendRequest({\n        url:    `${baseUrl}/api/watched/${animeId}`,\n        method: \"DELETE\",\n        header: {\n            \"Authorization\": `Bearer ${token}`,\n            \"Accept\":        \"application/json\"\n        }\n    }, function (err, res) {\n        console.log(\"[Cleanup] DELETE watched/\" + animeId + \" →\", res ? res.status() : err);\n    });\n}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "item": [
+        {
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "pm.environment.set(\"email\", `andi${Date.now()}@mail.com`);"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));\r\n\r\nconst body = pm.response.json();\r\npm.test(\"Data user dikembalikan\", () => {\r\n    pm.expect(body).to.have.property(\"id\");\r\n    pm.expect(body.email).to.eql(pm.environment.get(\"email\"));\r\n});\r\npm.test(\"Password tidak bocor\", () => {\r\n    pm.expect(pm.response.text()).to.not.include(\"password\");\r\n});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Register",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"username\": \"andi\",\n  \"email\": \"{{email}}\",\n  \"password\": \"rahasia123\"\n}"
+            },
+            "description": "Create a new account. Answers 409 if the email is already registered.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ],
+              "raw": "{{baseUrl}}/api/auth/register"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"id\": 28,\n  \"username\": \"andi\",\n  \"email\": \"andi1795837543581@mail.com\",\n  \"created_at\": \"2026-11-28T03:45:45.862961Z\"\n}",
+              "code": 201,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 03:45:43 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "107"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "201 Created - akun berhasil dibuat",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\n  \"username\": \"andi\",\n  \"email\": \"{{email}}\",\n  \"password\": \"rahasia123\"\n}"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ],
+                  "raw": "{{baseUrl}}/api/auth/register"
+                }
+              },
+              "status": "Created"
+            },
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"error\": \"Bad Request\",\n  \"message\": \"Validasi gagal - password: String should have at least 8 characters\",\n  \"status\": 400,\n  \"details\": [\n    {\n      \"field\": \"password\",\n      \"message\": \"String should have at least 8 characters\"\n    }\n  ]\n}",
+              "code": 400,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:00:47 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "202"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "400 Bad Request - validasi gagal",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\n  \"username\": \"andi\",\n  \"email\": \"{{email}}\",\n  \"password\": \"r\"\n}"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ],
+                  "raw": "{{baseUrl}}/api/auth/register"
+                }
+              },
+              "status": "Bad Request"
+            },
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"error\": \"Conflict\",\n  \"message\": \"Email sudah terdaftar.\",\n  \"status\": 409\n}",
+              "code": 409,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:09:52 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "68"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "409 Conflict - email sudah terdaftar",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\n  \"username\": \"andi\",\n  \"email\": \"andi1795838708151@mail.com\",\n  \"password\": \"rahasia123\"\n}"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ],
+                  "raw": "{{baseUrl}}/api/auth/register"
+                }
+              },
+              "status": "Conflict"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Login berhasil\", () => pm.response.to.have.status(200));\r\n\r\nconst body = pm.response.json();\r\npm.environment.set(\"token\", body.token);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Login",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{ \"email\": \"{{email}}\", \"password\": \"{{password}}\" }"
+            },
+            "description": "Verify credentials and return a JWT together with the user's public profile.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ],
+              "raw": "{{baseUrl}}/api/auth/login"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"token\": \"{{json_web_token_06ca}}\",\n  \"token_type\": \"bearer\",\n  \"user\": {\n    \"id\": 29,\n    \"username\": \"andi\",\n    \"email\": \"andi1795838708151@mail.com\",\n    \"created_at\": \"2026-11-28T04:05:10.766868Z\"\n  }\n}",
+              "code": 200,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:05:18 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "292"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "200 OK - token dikembalikan",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{ \"email\": \"{{email}}\", \"password\": \"{{password}}\" }"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ],
+                  "raw": "{{baseUrl}}/api/auth/login"
+                }
+              },
+              "status": "OK"
+            },
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"error\": \"Bad Request\",\n  \"message\": \"Validasi gagal - password: String should have at least 8 characters\",\n  \"status\": 400,\n  \"details\": [\n    {\n      \"field\": \"password\",\n      \"message\": \"String should have at least 8 characters\"\n    }\n  ]\n}",
+              "code": 400,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:05:50 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "202"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "400 Bad Request - validasi gagal",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{ \"email\": \"{{email}}\", \"password\": \"123\" }"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ],
+                  "raw": "{{baseUrl}}/api/auth/login"
+                }
+              },
+              "status": "Bad Request"
+            },
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"error\": \"Unauthorized\",\n  \"message\": \"Email atau password salah.\",\n  \"status\": 401\n}",
+              "code": 401,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:12:21 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "76"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "401 Unauthorized - email atau password salah",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{ \"email\": \"andi1795838708152@mail.com\", \"password\": \"{{password}}\" }"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "login"
+                  ],
+                  "raw": "{{baseUrl}}/api/auth/login"
+                }
+              },
+              "status": "Unauthorized"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\n\r\nconst list = pm.response.json();\r\npm.test(\"Berisi daftar anime\", () => {\r\n    pm.expect(list).to.be.an(\"array\").that.is.not.empty;\r\n});\r\npm.test(\"Tiap anime punya field yang lengkap\", () => {\r\n    [\"id\", \"title\", \"year\", \"studio\", \"genres\", \"rating\", \"episodes\",\r\n     \"total_episodes\", \"synopsis\", \"poster_url\", \"cast\"].forEach(f => {\r\n        pm.expect(list[0]).to.have.property(f);\r\n    });\r\n});\r\n\r\nconst pick = list[Math.floor(Math.random() * list.length)];\r\npm.environment.set(\"animeId\", pick.id);"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "List Animes",
+          "request": {
+            "description": "List animes. Optional filters: genre (case-insensitive), search (title or studio), shuffle.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "anime"
+              ],
+              "raw": "{{baseUrl}}/api/anime"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "[\n  {\n    \"id\": 1,\n    \"title\": \"Fullmetal Alchemist: Brotherhood\",\n    \"year\": 2009,\n    \"studio\": \"Bones\",\n    \"genres\": [\n      \"Action\",\n      \"Adventure\",\n      \"Fantasy\"\n    ],\n    \"rating\": 9.1,\n    \"episodes\": \"64 episodes\",\n    \"synopsis\": \"Dua bersaudara Edward dan Alphonse Elric kehilangan tubuh mereka setelah mencoba menghidupkan kembali ibu mereka dengan alkimia terlarang. Mereka mencari Batu Bijak untuk memulihkan apa yang hilang.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1223/96541.jpg\",\n    \"cast\": [\n      \"Romi Park\",\n      \"Rie Kugimiya\",\n      \"Shinichiro Miki\",\n      \"Fumiko Orikasa\"\n    ],\n    \"total_episodes\": 64\n  },\n  {\n    \"id\": 2,\n    \"title\": \"Attack on Titan\",\n    \"year\": 2013,\n    \"studio\": \"Wit Studio\",\n    \"genres\": [\n      \"Action\",\n      \"Drama\",\n      \"Fantasy\"\n    ],\n    \"rating\": 8.5,\n    \"episodes\": \"25 episodes\",\n    \"synopsis\": \"Setelah raksasa pemakan manusia menghancurkan tembok kota, Eren Yeager bersumpah memusnahkan mereka semua dan bergabung dengan pasukan pengintai demi merebut kembali kebebasan umat manusia.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/10/47347.jpg\",\n    \"cast\": [\n      \"Yuki Kaji\",\n      \"Yui Ishikawa\",\n      \"Marina Inoue\",\n      \"Hiroshi Kamiya\"\n    ],\n    \"total_episodes\": 25\n  },\n  {\n    \"id\": 3,\n    \"title\": \"Death Note\",\n    \"year\": 2006,\n    \"studio\": \"Madhouse\",\n    \"genres\": [\n      \"Mystery\",\n      \"Psychological\",\n      \"Thriller\"\n    ],\n    \"rating\": 8.6,\n    \"episodes\": \"37 episodes\",\n    \"synopsis\": \"Siswa jenius Light Yagami menemukan buku catatan yang bisa membunuh siapa pun yang namanya ditulis di dalamnya. Ia mulai membersihkan dunia dari kejahatan, sementara detektif misterius L memburunya.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/9/9453.jpg\",\n    \"cast\": [\n      \"Mamoru Miyano\",\n      \"Kappei Yamaguchi\",\n      \"Shido Nakamura\",\n      \"Aya Hirano\"\n    ],\n    \"total_episodes\": 37\n  },\n  {\n    \"id\": 4,\n    \"title\": \"Cowboy Bebop\",\n    \"year\": 1998,\n    \"studio\": \"Sunrise\",\n    \"genres\": [\n      \"Action\",\n      \"Adventure\",\n      \"Sci-Fi\"\n    ],\n    \"rating\": 8.7,\n    \"episodes\": \"26 episodes\",\n    \"synopsis\": \"Pada tahun 2071, sekelompok pemburu hadiah di atas pesawat Bebop menjelajahi tata surya sambil dikejar masa lalu masing-masing, diiringi musik jazz yang ikonik.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/4/19644.jpg\",\n    \"cast\": [\n      \"Koichi Yamadera\",\n      \"Unsho Ishizuka\",\n      \"Megumi Hayashibara\",\n      \"Aoi Tada\"\n    ],\n    \"total_episodes\": 26\n  },\n  {\n    \"id\": 5,\n    \"title\": \"Demon Slayer: Kimetsu no Yaiba\",\n    \"year\": 2019,\n    \"studio\": \"Ufotable\",\n    \"genres\": [\n      \"Action\",\n      \"Fantasy\",\n      \"Supernatural\"\n    ],\n    \"rating\": 8.4,\n    \"episodes\": \"26 episodes\",\n    \"synopsis\": \"Tanjiro Kamado menjadi pemburu iblis setelah keluarganya dibantai dan adiknya Nezuko berubah menjadi iblis. Ia berlatih keras untuk menemukan obat bagi adiknya.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1286/99889.jpg\",\n    \"cast\": [\n      \"Natsuki Hanae\",\n      \"Akari Kito\",\n      \"Hiro Shimono\",\n      \"Yoshitsugu Matsuoka\"\n    ],\n    \"total_episodes\": 26\n  },\n  {\n    \"id\": 6,\n    \"title\": \"Spirited Away\",\n    \"year\": 2001,\n    \"studio\": \"Studio Ghibli\",\n    \"genres\": [\n      \"Adventure\",\n      \"Family\",\n      \"Fantasy\"\n    ],\n    \"rating\": 8.8,\n    \"episodes\": \"1 film (125 menit)\",\n    \"synopsis\": \"Chihiro, gadis berusia 10 tahun, tersesat ke dunia roh. Setelah orang tuanya berubah menjadi babi, ia bekerja di pemandian air panas para dewa untuk membebaskan mereka.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/6/79597.jpg\",\n    \"cast\": [\n      \"Rumi Hiiragi\",\n      \"Miyu Irino\",\n      \"Mari Natsuki\",\n      \"Takashi Naito\"\n    ],\n    \"total_episodes\": 1\n  },\n  {\n    \"id\": 7,\n    \"title\": \"Your Name\",\n    \"year\": 2016,\n    \"studio\": \"CoMix Wave Films\",\n    \"genres\": [\n      \"Drama\",\n      \"Romance\",\n      \"Supernatural\"\n    ],\n    \"rating\": 8.8,\n    \"episodes\": \"1 film (107 menit)\",\n    \"synopsis\": \"Mitsuha, gadis desa, dan Taki, pelajar Tokyo, tiba-tiba saling bertukar tubuh dalam mimpi. Saat mereka mulai saling mengenal, sebuah tragedi yang mengintai menguji ikatan mereka.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/5/87048.jpg\",\n    \"cast\": [\n      \"Ryunosuke Kamiki\",\n      \"Mone Kamishiraishi\",\n      \"Ryo Narita\",\n      \"Aoi Yuki\"\n    ],\n    \"total_episodes\": 1\n  },\n  {\n    \"id\": 8,\n    \"title\": \"Steins;Gate\",\n    \"year\": 2011,\n    \"studio\": \"White Fox\",\n    \"genres\": [\n      \"Drama\",\n      \"Sci-Fi\",\n      \"Thriller\"\n    ],\n    \"rating\": 9.1,\n    \"episodes\": \"24 episodes\",\n    \"synopsis\": \"Mahasiswa eksentrik Rintaro Okabe tanpa sengaja menemukan cara mengirim pesan ke masa lalu. Setiap perubahan kecil memicu konsekuensi besar yang memaksanya menanggung beban garis waktu.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/5/73199.jpg\",\n    \"cast\": [\n      \"Mamoru Miyano\",\n      \"Asami Imai\",\n      \"Kana Hanazawa\",\n      \"Tomokazu Seki\"\n    ],\n    \"total_episodes\": 24\n  },\n  {\n    \"id\": 9,\n    \"title\": \"One Punch Man\",\n    \"year\": 2015,\n    \"studio\": \"Madhouse\",\n    \"genres\": [\n      \"Action\",\n      \"Comedy\",\n      \"Parody\"\n    ],\n    \"rating\": 8.5,\n    \"episodes\": \"12 episodes\",\n    \"synopsis\": \"Saitama, pahlawan yang bisa mengalahkan musuh apa pun dengan satu pukulan, justru bosan karena tak ada lawan yang sepadan. Ia mencari tantangan nyata sambil menjalani hidup sehari-hari.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/12/76049.jpg\",\n    \"cast\": [\n      \"Makoto Furukawa\",\n      \"Kaito Ishikawa\",\n      \"Hiroki Yasumoto\",\n      \"Yuki Kaji\"\n    ],\n    \"total_episodes\": 12\n  },\n  {\n    \"id\": 10,\n    \"title\": \"Hunter x Hunter (2011)\",\n    \"year\": 2011,\n    \"studio\": \"Madhouse\",\n    \"genres\": [\n      \"Action\",\n      \"Adventure\",\n      \"Fantasy\"\n    ],\n    \"rating\": 9,\n    \"episodes\": \"148 episodes\",\n    \"synopsis\": \"Gon Freecss, bocah 12 tahun, menjadi Hunter untuk mencari ayahnya. Dalam perjalanannya ia bersahabat dengan Killua, Kurapika, dan Leorio sambil menghadapi bahaya yang kian besar.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1337/99013.jpg\",\n    \"cast\": [\n      \"Megumi Han\",\n      \"Mariya Ise\",\n      \"Miyuki Sawashiro\",\n      \"Keiji Fujiwara\"\n    ],\n    \"total_episodes\": 148\n  },\n  {\n    \"id\": 11,\n    \"title\": \"Jujutsu Kaisen\",\n    \"year\": 2020,\n    \"studio\": \"MAPPA\",\n    \"genres\": [\n      \"Action\",\n      \"Fantasy\",\n      \"Supernatural\"\n    ],\n    \"rating\": 8.6,\n    \"episodes\": \"24 episodes\",\n    \"synopsis\": \"Yuji Itadori menelan jari terkutuk demi menyelamatkan temannya dan menjadi wadah bagi raja kutukan Sukuna. Ia pun bergabung dengan sekolah jujutsu untuk melawan kutukan jahat.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1171/109222.jpg\",\n    \"cast\": [\n      \"Junya Enoki\",\n      \"Yuma Uchida\",\n      \"Asami Seto\",\n      \"Yuichi Nakamura\"\n    ],\n    \"total_episodes\": 24\n  },\n  {\n    \"id\": 12,\n    \"title\": \"Frieren: Beyond Journey's End\",\n    \"year\": 2023,\n    \"studio\": \"Madhouse\",\n    \"genres\": [\n      \"Adventure\",\n      \"Drama\",\n      \"Fantasy\"\n    ],\n    \"rating\": 9.3,\n    \"episodes\": \"28 episodes\",\n    \"synopsis\": \"Setelah mengalahkan Raja Iblis, penyihir elf Frieren menyadari betapa singkatnya hidup rekan-rekan manusianya. Ia memulai perjalanan baru untuk memahami arti hubungan dan waktu.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1015/138006.jpg\",\n    \"cast\": [\n      \"Atsumi Tanezaki\",\n      \"Kana Ichinose\",\n      \"Chiaki Kobayashi\",\n      \"Mallorie Rodak\"\n    ],\n    \"total_episodes\": 28\n  },\n  {\n    \"id\": 13,\n    \"title\": \"Violet Evergarden\",\n    \"year\": 2018,\n    \"studio\": \"Kyoto Animation\",\n    \"genres\": [\n      \"Drama\",\n      \"Fantasy\",\n      \"Slice of Life\"\n    ],\n    \"rating\": 8.5,\n    \"episodes\": \"13 episodes\",\n    \"synopsis\": \"Mantan prajurit Violet Evergarden bekerja sebagai penulis surat pengganti sambil mencari arti kata terakhir yang diucapkan komandannya: \\\"aku mencintaimu\\\".\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1795/95088.jpg\",\n    \"cast\": [\n      \"Yui Ishikawa\",\n      \"Daisuke Namikawa\",\n      \"Takehito Koyasu\",\n      \"Minori Chihara\"\n    ],\n    \"total_episodes\": 13\n  },\n  {\n    \"id\": 14,\n    \"title\": \"Code Geass: Lelouch of the Rebellion\",\n    \"year\": 2006,\n    \"studio\": \"Sunrise\",\n    \"genres\": [\n      \"Action\",\n      \"Drama\",\n      \"Sci-Fi\"\n    ],\n    \"rating\": 8.7,\n    \"episodes\": \"25 episodes\",\n    \"synopsis\": \"Pangeran buangan Lelouch memperoleh kekuatan Geass yang membuat siapa pun menuruti perintahnya. Ia memimpin pemberontakan terhadap Kekaisaran Britannia demi dunia yang lebih baik bagi adiknya.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/5/50331.jpg\",\n    \"cast\": [\n      \"Jun Fukuyama\",\n      \"Takahiro Sakurai\",\n      \"Ami Koshimizu\",\n      \"Kaori Nazuka\"\n    ],\n    \"total_episodes\": 25\n  },\n  {\n    \"id\": 15,\n    \"title\": \"Vinland Saga\",\n    \"year\": 2019,\n    \"studio\": \"Wit Studio\",\n    \"genres\": [\n      \"Action\",\n      \"Adventure\",\n      \"Drama\"\n    ],\n    \"rating\": 8.7,\n    \"episodes\": \"24 episodes\",\n    \"synopsis\": \"Thorfinn, pemuda Viking, bergabung dengan pasukan pembunuh ayahnya demi membalas dendam. Perjalanan penuh perang itu perlahan membuatnya mempertanyakan arti kekuatan dan kedamaian.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1500/103005.jpg\",\n    \"cast\": [\n      \"Yuto Uemura\",\n      \"Takehito Koyasu\",\n      \"Akio Otsuka\",\n      \"Aoi Yuki\"\n    ],\n    \"total_episodes\": 24\n  },\n  {\n    \"id\": 16,\n    \"title\": \"Mob Psycho 100\",\n    \"year\": 2016,\n    \"studio\": \"Bones\",\n    \"genres\": [\n      \"Action\",\n      \"Comedy\",\n      \"Supernatural\"\n    ],\n    \"rating\": 8.5,\n    \"episodes\": \"12 episodes\",\n    \"synopsis\": \"Shigeo \\\"Mob\\\" Kageyama, pelajar SMP dengan kekuatan psikis luar biasa, berusaha hidup normal sambil menekan emosinya agar kekuatan itu tidak meledak tak terkendali.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/8/80356.jpg\",\n    \"cast\": [\n      \"Setsuo Ito\",\n      \"Takahiro Sakurai\",\n      \"Kane Kosugi\",\n      \"Miyu Irino\"\n    ],\n    \"total_episodes\": 12\n  },\n  {\n    \"id\": 17,\n    \"title\": \"Haikyu!!\",\n    \"year\": 2014,\n    \"studio\": \"Production I.G\",\n    \"genres\": [\n      \"Comedy\",\n      \"Drama\",\n      \"Sports\"\n    ],\n    \"rating\": 8.7,\n    \"episodes\": \"25 episodes\",\n    \"synopsis\": \"Shoyo Hinata, pemain voli bertubuh pendek yang bermimpi menjadi sang \\\"raksasa kecil\\\", bergabung dengan tim SMA Karasuno dan bersaing bersama rival lamanya, Tobio Kageyama.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/7/76014.jpg\",\n    \"cast\": [\n      \"Ayumu Murase\",\n      \"Kaito Ishikawa\",\n      \"Satoshi Hino\",\n      \"Yuki Kaji\"\n    ],\n    \"total_episodes\": 25\n  },\n  {\n    \"id\": 18,\n    \"title\": \"Neon Genesis Evangelion\",\n    \"year\": 1995,\n    \"studio\": \"Gainax\",\n    \"genres\": [\n      \"Action\",\n      \"Psychological\",\n      \"Sci-Fi\"\n    ],\n    \"rating\": 8.3,\n    \"episodes\": \"26 episodes\",\n    \"synopsis\": \"Shinji Ikari dipaksa mengendalikan robot raksasa Eva untuk melawan makhluk misterius bernama Angel, sambil bergulat dengan trauma, kesepian, dan hubungan antarmanusia.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1314/108941.jpg\",\n    \"cast\": [\n      \"Megumi Ogata\",\n      \"Megumi Hayashibara\",\n      \"Kotono Mitsuishi\",\n      \"Yuriko Yamaguchi\"\n    ],\n    \"total_episodes\": 26\n  },\n  {\n    \"id\": 19,\n    \"title\": \"Made in Abyss\",\n    \"year\": 2017,\n    \"studio\": \"Kinema Citrus\",\n    \"genres\": [\n      \"Adventure\",\n      \"Fantasy\",\n      \"Mystery\"\n    ],\n    \"rating\": 8.7,\n    \"episodes\": \"13 episodes\",\n    \"synopsis\": \"Riko, gadis yatim yang bercita-cita menjadi penjelajah, turun ke jurang raksasa penuh misteri bersama robot bocah bernama Reg untuk mencari ibunya yang menghilang.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/6/86733.jpg\",\n    \"cast\": [\n      \"Miyu Tomita\",\n      \"Mariya Ise\",\n      \"Mutsumi Tamura\",\n      \"Shiori Izawa\"\n    ],\n    \"total_episodes\": 13\n  },\n  {\n    \"id\": 20,\n    \"title\": \"Spy x Family\",\n    \"year\": 2022,\n    \"studio\": \"Wit Studio\",\n    \"genres\": [\n      \"Action\",\n      \"Comedy\",\n      \"Slice of Life\"\n    ],\n    \"rating\": 8.6,\n    \"episodes\": \"25 episodes\",\n    \"synopsis\": \"Mata-mata Twilight harus membangun keluarga palsu demi misi rahasia, tanpa tahu bahwa putri angkatnya seorang telepat dan istrinya adalah pembunuh bayaran.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1441/122795.jpg\",\n    \"cast\": [\n      \"Takuya Eguchi\",\n      \"Atsumi Tanezaki\",\n      \"Saori Hayami\",\n      \"Ryuichi Kijima\"\n    ],\n    \"total_episodes\": 25\n  }\n]",
+              "code": 200,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:13:57 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "10059"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "200 OK - list anime ditemukan",
+              "originalRequest": {
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "anime"
+                  ],
+                  "raw": "{{baseUrl}}/api/anime"
+                }
+              },
+              "status": "OK"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\n\nconst anime = pm.response.json();\npm.test(\"Berisi anime\", () => pm.expect(anime).to.be.an(\"object\").that.is.not.empty);\n\nif (anime.id) {\n    pm.environment.set(\"animeId\", anime.id);\n}"
+                ],
+                "type": "text/javascript"
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Get Anime",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": ""
+            },
+            "description": "Return a single anime, or 404 if it does not exist.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "anime",
+                "{{animeId}}"
+              ],
+              "raw": "{{baseUrl}}/api/anime/{{animeId}}"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"id\": 3,\n  \"title\": \"Death Note\",\n  \"year\": 2006,\n  \"studio\": \"Madhouse\",\n  \"genres\": [\n    \"Mystery\",\n    \"Psychological\",\n    \"Thriller\"\n  ],\n  \"rating\": 8.6,\n  \"episodes\": \"37 episodes\",\n  \"synopsis\": \"Siswa jenius Light Yagami menemukan buku catatan yang bisa membunuh siapa pun yang namanya ditulis di dalamnya. Ia mulai membersihkan dunia dari kejahatan, sementara detektif misterius L memburunya.\",\n  \"poster_url\": \"https://cdn.myanimelist.net/images/anime/9/9453.jpg\",\n  \"cast\": [\n    \"Mamoru Miyano\",\n    \"Kappei Yamaguchi\",\n    \"Shido Nakamura\",\n    \"Aya Hirano\"\n  ],\n  \"total_episodes\": 37\n}",
+              "code": 200,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:23:32 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "520"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "200 OK - anime ditemukan",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": ""
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "anime",
+                    "{{animeId}}"
+                  ],
+                  "raw": "{{baseUrl}}/api/anime/{{animeId}}"
+                }
+              },
+              "status": "OK"
+            },
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"error\": \"Not Found\",\n  \"message\": \"Anime tidak ditemukan.\",\n  \"status\": 404\n}",
+              "code": 404,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 04:24:07 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "69"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "404 Not Found - anime tidak ditemukan",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": ""
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "anime",
+                    "21"
+                  ],
+                  "raw": "{{baseUrl}}/api/anime/21"
+                }
+              },
+              "status": "Not Found"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));\r\n\r\nconst item = pm.response.json();\r\npm.test(\"Anime masuk ke watchlist\", () => {\r\n    pm.expect(item.anime_id).to.eql(Number(pm.environment.get(\"animeId\")));\r\n    pm.expect(item.anime).to.have.property(\"title\");\r\n});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Add To Watchlist",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\"animeId\": {{animeId}}}"
+            },
+            "description": "Add a anime to the current user's watchlist (404 unknown anime, 409 duplicate).",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "watchlist"
+              ],
+              "raw": "{{baseUrl}}/api/watchlist"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"id\": 49,\n  \"anime_id\": 16,\n  \"created_at\": \"2026-11-28T06:17:11.649080Z\",\n  \"anime\": {\n    \"id\": 16,\n    \"title\": \"Mob Psycho 100\",\n    \"year\": 2016,\n    \"studio\": \"Bones\",\n    \"genres\": [\n      \"Action\",\n      \"Comedy\",\n      \"Supernatural\"\n    ],\n    \"rating\": 8.5,\n    \"episodes\": \"12 episodes\",\n    \"synopsis\": \"Shigeo \\\"Mob\\\" Kageyama, pelajar SMP dengan kekuatan psikis luar biasa, berusaha hidup normal sambil menekan emosinya agar kekuatan itu tidak meledak tak terkendali.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/8/80356.jpg\",\n    \"cast\": [\n      \"Setsuo Ito\",\n      \"Takahiro Sakurai\",\n      \"Kane Kosugi\",\n      \"Miyu Irino\"\n    ],\n    \"total_episodes\": 12\n  }\n}",
+              "code": 201,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 06:17:09 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "555"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "201 Created - anime ditambahkan",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\"animeId\": {{animeId}}}"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watchlist"
+                  ],
+                  "raw": "{{baseUrl}}/api/watchlist"
+                }
+              },
+              "status": "Created"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", () => {\n    pm.response.to.have.status(200);\n});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Get Watchlist",
+          "request": {
+            "description": "Return the current user's watchlist, newest first.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "watchlist"
+              ],
+              "raw": "{{baseUrl}}/api/watchlist"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "[]",
+              "code": 200,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 06:14:25 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "2"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "200 OK - daftar watchlist",
+              "originalRequest": {
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watchlist"
+                  ],
+                  "raw": "{{baseUrl}}/api/watchlist"
+                }
+              },
+              "status": "OK"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\npm.test(\"Progress tersimpan\", () => {\n    const p = pm.response.json();\n    pm.expect(p.status).to.eql(\"watching\");\n    pm.expect(p.current_episode).to.eql(3);\n});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Set Progress",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\"status\": \"watching\", \"currentEpisode\": 3}"
+            },
+            "description": "Update anime watching progress, episode number cannot excede the total",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "progress",
+                "{{animeId}}"
+              ],
+              "raw": "{{baseUrl}}/api/progress/{{animeId}}"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"id\": 6,\n  \"anime_id\": 16,\n  \"status\": \"watching\",\n  \"current_episode\": 3,\n  \"total_episodes\": 12,\n  \"updated_at\": \"2026-11-28T06:14:35.798418Z\",\n  \"anime\": {\n    \"id\": 16,\n    \"title\": \"Mob Psycho 100\",\n    \"year\": 2016,\n    \"studio\": \"Bones\",\n    \"genres\": [\n      \"Action\",\n      \"Comedy\",\n      \"Supernatural\"\n    ],\n    \"rating\": 8.5,\n    \"episodes\": \"12 episodes\",\n    \"synopsis\": \"Shigeo \\\"Mob\\\" Kageyama, pelajar SMP dengan kekuatan psikis luar biasa, berusaha hidup normal sambil menekan emosinya agar kekuatan itu tidak meledak tak terkendali.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/8/80356.jpg\",\n    \"cast\": [\n      \"Setsuo Ito\",\n      \"Takahiro Sakurai\",\n      \"Kane Kosugi\",\n      \"Miyu Irino\"\n    ],\n    \"total_episodes\": 12\n  }\n}",
+              "code": 200,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 06:14:33 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "614"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "200 OK - progress tersimpan",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\"status\": \"watching\", \"currentEpisode\": 3}"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "progress",
+                    "{{animeId}}"
+                  ],
+                  "raw": "{{baseUrl}}/api/progress/{{animeId}}"
+                }
+              },
+              "status": "OK"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 201\", () => pm.response.to.have.status(201));\r\n\r\nconst entry = pm.response.json();\r\npm.test(\"Review tersimpan\", () => {\r\n    pm.expect(entry.rating).to.eql(5);\r\n    pm.expect(entry.review).to.eql(\"Seru Banget\");\r\n    pm.expect(entry.anime_id).to.eql(Number(pm.environment.get(\"animeId\")));\r\n});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Log Watched",
+          "request": {
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              },
+              "raw": "{\n  \"animeId\": {{animeId}},\n  \"rating\": 5,\n  \"review\": \"Seru Banget\"\n}"
+            },
+            "description": "Record that the current user watched a anime, with a 1-5 rating and a review.",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "watched"
+              ],
+              "raw": "{{baseUrl}}/api/watched"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "{\n  \"id\": 25,\n  \"anime_id\": 16,\n  \"rating\": 5,\n  \"review\": \"Seru Banget\",\n  \"created_at\": \"2026-11-28T06:15:20.546620Z\",\n  \"anime\": {\n    \"id\": 16,\n    \"title\": \"Mob Psycho 100\",\n    \"year\": 2016,\n    \"studio\": \"Bones\",\n    \"genres\": [\n      \"Action\",\n      \"Comedy\",\n      \"Supernatural\"\n    ],\n    \"rating\": 8.5,\n    \"episodes\": \"12 episodes\",\n    \"synopsis\": \"Shigeo \\\"Mob\\\" Kageyama, pelajar SMP dengan kekuatan psikis luar biasa, berusaha hidup normal sambil menekan emosinya agar kekuatan itu tidak meledak tak terkendali.\",\n    \"poster_url\": \"https://cdn.myanimelist.net/images/anime/8/80356.jpg\",\n    \"cast\": [\n      \"Setsuo Ito\",\n      \"Takahiro Sakurai\",\n      \"Kane Kosugi\",\n      \"Miyu Irino\"\n    ],\n    \"total_episodes\": 12\n  }\n}",
+              "code": 201,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 06:15:18 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "589"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "201 Created - review tersimpan",
+              "originalRequest": {
+                "body": {
+                  "mode": "raw",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  },
+                  "raw": "{\n  \"animeId\": {{animeId}},\n  \"rating\": 5,\n  \"review\": \"Seru Banget\"\n}"
+                },
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "watched"
+                  ],
+                  "raw": "{{baseUrl}}/api/watched"
+                }
+              },
+              "status": "Created"
+            }
+          ]
+        },
+        {
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r\n\r\nconst recs = pm.response.json();\r\npm.test(\"Berupa daftar rekomendasi\", () => {\r\n    pm.expect(recs).to.be.an(\"array\").that.is.not.empty;\r\n    recs.forEach(r => {\r\n        pm.expect(r).to.have.property(\"anime\");\r\n        pm.expect(r).to.have.property(\"score\");\r\n        pm.expect(r.reason).to.be.a(\"string\");\r\n    });\r\n});\r\npm.test(\"Anime yang sudah dicatat tidak direkomendasikan\", () => {\r\n    const seen = Number(pm.environment.get(\"animeId\"));\r\n    pm.expect(recs.map(r => r.anime.id)).to.not.include(seen);\r\n});\r\npm.test(\"Diurutkan dari skor tertinggi\", () => {\r\n    const scores = recs.map(r => r.score);\r\n    pm.expect(scores).to.eql([...scores].sort((a, b) => b - a));\r\n});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "name": "Get Recommendations",
+          "request": {
+            "description": "Recomendation based on genre, studio, and rating of the anime.",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "url": {
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "recommendations"
+              ],
+              "query": [
+                {
+                  "description": "Maksimal jumlah rekomendasi",
+                  "key": "limit",
+                  "value": "5"
+                }
+              ],
+              "raw": "{{baseUrl}}/api/recommendations?limit=5"
+            }
+          },
+          "response": [
+            {
+              "_postman_previewlanguage": "json",
+              "body": "[\n  {\n    \"anime\": {\n      \"id\": 11,\n      \"title\": \"Jujutsu Kaisen\",\n      \"year\": 2020,\n      \"studio\": \"MAPPA\",\n      \"genres\": [\n        \"Action\",\n        \"Fantasy\",\n        \"Supernatural\"\n      ],\n      \"rating\": 8.6,\n      \"episodes\": \"24 episodes\",\n      \"synopsis\": \"Yuji Itadori menelan jari terkutuk demi menyelamatkan temannya dan menjadi wadah bagi raja kutukan Sukuna. Ia pun bergabung dengan sekolah jujutsu untuk melawan kutukan jahat.\",\n      \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1171/109222.jpg\",\n      \"cast\": [\n        \"Junya Enoki\",\n        \"Yuma Uchida\",\n        \"Asami Seto\",\n        \"Yuichi Nakamura\"\n      ],\n      \"total_episodes\": 24\n    },\n    \"score\": 0.615,\n    \"reason\": \"Karena kamu menyukai Mob Psycho 100 (genre sama: Action, Supernatural)\"\n  },\n  {\n    \"anime\": {\n      \"id\": 20,\n      \"title\": \"Spy x Family\",\n      \"year\": 2022,\n      \"studio\": \"Wit Studio\",\n      \"genres\": [\n        \"Action\",\n        \"Comedy\",\n        \"Slice of Life\"\n      ],\n      \"rating\": 8.6,\n      \"episodes\": \"25 episodes\",\n      \"synopsis\": \"Mata-mata Twilight harus membangun keluarga palsu demi misi rahasia, tanpa tahu bahwa putri angkatnya seorang telepat dan istrinya adalah pembunuh bayaran.\",\n      \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1441/122795.jpg\",\n      \"cast\": [\n        \"Takuya Eguchi\",\n        \"Atsumi Tanezaki\",\n        \"Saori Hayami\",\n        \"Ryuichi Kijima\"\n      ],\n      \"total_episodes\": 25\n    },\n    \"score\": 0.615,\n    \"reason\": \"Karena kamu menyukai Mob Psycho 100 (genre sama: Action, Comedy)\"\n  },\n  {\n    \"anime\": {\n      \"id\": 9,\n      \"title\": \"One Punch Man\",\n      \"year\": 2015,\n      \"studio\": \"Madhouse\",\n      \"genres\": [\n        \"Action\",\n        \"Comedy\",\n        \"Parody\"\n      ],\n      \"rating\": 8.5,\n      \"episodes\": \"12 episodes\",\n      \"synopsis\": \"Saitama, pahlawan yang bisa mengalahkan musuh apa pun dengan satu pukulan, justru bosan karena tak ada lawan yang sepadan. Ia mencari tantangan nyata sambil menjalani hidup sehari-hari.\",\n      \"poster_url\": \"https://cdn.myanimelist.net/images/anime/12/76049.jpg\",\n      \"cast\": [\n        \"Makoto Furukawa\",\n        \"Kaito Ishikawa\",\n        \"Hiroki Yasumoto\",\n        \"Yuki Kaji\"\n      ],\n      \"total_episodes\": 12\n    },\n    \"score\": 0.612,\n    \"reason\": \"Karena kamu menyukai Mob Psycho 100 (genre sama: Action, Comedy)\"\n  },\n  {\n    \"anime\": {\n      \"id\": 5,\n      \"title\": \"Demon Slayer: Kimetsu no Yaiba\",\n      \"year\": 2019,\n      \"studio\": \"Ufotable\",\n      \"genres\": [\n        \"Action\",\n        \"Fantasy\",\n        \"Supernatural\"\n      ],\n      \"rating\": 8.4,\n      \"episodes\": \"26 episodes\",\n      \"synopsis\": \"Tanjiro Kamado menjadi pemburu iblis setelah keluarganya dibantai dan adiknya Nezuko berubah menjadi iblis. Ia berlatih keras untuk menemukan obat bagi adiknya.\",\n      \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1286/99889.jpg\",\n      \"cast\": [\n        \"Natsuki Hanae\",\n        \"Akari Kito\",\n        \"Hiro Shimono\",\n        \"Yoshitsugu Matsuoka\"\n      ],\n      \"total_episodes\": 26\n    },\n    \"score\": 0.61,\n    \"reason\": \"Karena kamu menyukai Mob Psycho 100 (genre sama: Action, Supernatural)\"\n  },\n  {\n    \"anime\": {\n      \"id\": 1,\n      \"title\": \"Fullmetal Alchemist: Brotherhood\",\n      \"year\": 2009,\n      \"studio\": \"Bones\",\n      \"genres\": [\n        \"Action\",\n        \"Adventure\",\n        \"Fantasy\"\n      ],\n      \"rating\": 9.1,\n      \"episodes\": \"64 episodes\",\n      \"synopsis\": \"Dua bersaudara Edward dan Alphonse Elric kehilangan tubuh mereka setelah mencoba menghidupkan kembali ibu mereka dengan alkimia terlarang. Mereka mencari Batu Bijak untuk memulihkan apa yang hilang.\",\n      \"poster_url\": \"https://cdn.myanimelist.net/images/anime/1223/96541.jpg\",\n      \"cast\": [\n        \"Romi Park\",\n        \"Rie Kugimiya\",\n        \"Shinichiro Miki\",\n        \"Fumiko Orikasa\"\n      ],\n      \"total_episodes\": 64\n    },\n    \"score\": 0.577,\n    \"reason\": \"Karena kamu menyukai Mob Psycho 100 (genre sama: Action; studio sama: Bones)\"\n  }\n]",
+              "code": 200,
+              "cookie": [],
+              "header": [
+                {
+                  "key": "date",
+                  "value": "Sat, 28 Nov 2026 06:15:45 GMT"
+                },
+                {
+                  "key": "server",
+                  "value": "uvicorn"
+                },
+                {
+                  "key": "content-length",
+                  "value": "3049"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json"
+                }
+              ],
+              "name": "200 OK - daftar rekomendasi",
+              "originalRequest": {
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "url": {
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "recommendations"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maksimal jumlah rekomendasi",
+                      "key": "limit",
+                      "value": "5"
+                    }
+                  ],
+                  "raw": "{{baseUrl}}/api/recommendations?limit=5"
+                }
+              },
+              "status": "OK"
+            }
+          ]
+        }
+      ],
+      "name": "Test Flow"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    },
+    {
+      "key": "json_web_token_0fre",
+      "secret": true
+    }
+  ]
+}
