@@ -32,5 +32,4 @@ class Settings(BaseSettings):
     
 @lru_cache()
 def get_settings() -> Settings:
-    """Cached accessor: settings (and the .env file) are parsed only once."""
     return Settings()

@@ -12,7 +12,9 @@ settings = get_settings()
 app = FastAPI(
     title="AnimeLog API",
     version="1.0.0",
-    description="REST API watchlist & review anime dengan rekomendasi Gemini (grounded ke database lokal).",
+    description=(
+        "REST API watchlist, progress tontonan & review anime dengan rekomendasi berbasis aturan."
+    ),
 )
 
 # Uniform JSON error format for every failure.
@@ -28,10 +30,8 @@ app.include_router(recommendations.router)
 
 @app.get("/api/health", tags=["Meta"])
 def health():
-    """Lightweight liveness probe (does not touch the database)."""
     return {"status": "ok"}
 
 @app.get("/", include_in_schema=False)
 def root():
-    """Landing route so the bare URL is not a 404."""
     return {"name": "AnimeLog API", "docs": "/docs", "health": "/api/health"}

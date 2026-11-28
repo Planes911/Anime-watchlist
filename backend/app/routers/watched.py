@@ -16,13 +16,11 @@ router = APIRouter(prefix="/api/watched", tags=["Watched & Reviews"], dependenci
 
 @router.get("", response_model=list[Watched_Out])
 def list_watched(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Return the current user's watched animes, newest first."""
     stmt = select(Review).where(Review.user_id == user.id).order_by(Review.created_at.desc(), Review.id.desc())
     return [Watched_Out.from_model(r) for r in db.scalars(stmt).all()]
 
 @router.post("", response_model=Watched_Out, status_code=201)
 def log_watched(payload: Watched_In, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Record that the current user watched a anime, with a 1-5 rating and a review."""
     anime = db.get(Anime, payload.anime_id)
     if anime is None:
         raise Api_Error(404, "Anime tidak ditemukan.")

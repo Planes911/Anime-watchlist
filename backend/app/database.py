@@ -9,11 +9,9 @@ from sqlalchemy.pool import StaticPool
 from app.config import get_settings
 
 class Base(DeclarativeBase):
-    """Shared declarative base class for all ORM models."""
     pass
 
 def make_engine(url: str):
-    """Create an engine tuned for SQLite (dev/tests) or PostgreSQL (production)."""
     kwargs: dict = {}
     if url.startswith("sqlite"):
         kwargs["connect_args"] = {"check_same_thread": False}
@@ -46,7 +44,6 @@ engine = make_engine(get_settings().database_url)
 SessionLocal = sessionmaker(bind=engine, autoflush=False, expire_on_commit=False)
 
 def get_db() -> Iterator[Session]:
-    """FastAPI dependency: one database session per request, always closed afterwards."""
     db = SessionLocal()
     try:
         yield db

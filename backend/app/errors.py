@@ -11,7 +11,6 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 logger = logging.getLogger("animelog")
 
 class Api_Error(Exception):
-    """Raised on purpose by our own code: an HTTP status plus a client-safe message."""
     def __init__(self, status_code: int, message: str, headers: dict | None = None):
         self.status_code = status_code
         self.message = message
@@ -19,11 +18,9 @@ class Api_Error(Exception):
         super().__init__(message)
         
 def _body(status_code: int, message: str, **extra) -> dict:
-    """Build the uniform error response body."""
     return {"error": HTTPStatus(status_code).phrase, "message": message, "status": status_code, **extra}
 
 def register_exception_handlers(app: FastAPI) -> None:
-    """Install handlers so every error, expected or not, shares the same JSON shape."""
     @app.exception_handler(Api_Error)
     async def _api_error(_: Request, exc: Api_Error):
         return JSONResponse(_body(exc.status_code, exc.message), status_code=exc.status_code, headers=exc.headers)

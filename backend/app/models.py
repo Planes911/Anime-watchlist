@@ -20,19 +20,16 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.database import Base
 
 def utcnow() -> datetime:
-    """Timezone-aware UTC timestamp, used as the default for created_at columns."""
     return datetime.now(timezone.utc)
 
 # Association table for the many-to-many relation between animes and genres.
 anime_genres = Table(
-    "anime_genres",
     Base.metadata,
     Column("anime_id", ForeignKey("animes.id", ondelete="CASCADE"), primary_key=True),
     Column("genre_id", ForeignKey("genres.id", ondelete="CASCADE"), primary_key=True, index=True)
 )
 
 class User(Base):
-    """A registered account."""
     __tablename__ = "users"
     
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -46,14 +43,12 @@ class User(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
 
 class Genre(Base):
-    """A anime genre (e.g. Sci-Fi)."""
     __tablename__ = "genres"
     
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(50), unique=True)
 
 class Anime(Base):
-    """A anime in the catalogue, seeded from data/anime.json."""
     __tablename__ = "animes"
     
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -73,11 +68,6 @@ class Anime(Base):
     )
     
 class Watchlist_Item(Base):
-    """A anime a user wants to watch later.
-
-    Rows are removed automatically (ON DELETE CASCADE) when the user or the anime is deleted,
-    and the anime is joined-loaded so listing a watchlist needs a single query.
-    """
     __tablename__ = "watchlists"
     
     # A anime can be on a user's watchlist only once. The database enforces it, so the rule also
@@ -92,7 +82,6 @@ class Watchlist_Item(Base):
     anime: Mapped["Anime"] = relationship(lazy="joined")
 
 class Review(Base):
-    """A user's rating and written opinion for a anime they have watched."""
     __tablename__ = "reviews"
     # One review per user and anime. The CHECK constraint backs up the API validation, so an
     # invalid rating can never reach the table.

@@ -20,10 +20,6 @@ def get_current_user(
     creds: HTTPAuthorizationCredentials | None = Depends(bearer_scheme),
     db: Session = Depends(get_db),
 ) -> User:
-    """Resolve the logged-in user from the `Authorization: Bearer <token>` header.
-
-    Raises 401 when the token is missing, malformed or expired, or when its account no longer exists.
-    """
     if creds is None:
         raise Api_Error(401, "Token autentikasi tidak ditemukan. Login terlebih dahulu.", _WWW_AUTH)
     try:

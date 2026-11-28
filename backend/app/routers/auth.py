@@ -20,7 +20,6 @@ router = APIRouter(prefix="/api/auth", tags=["Auth"])
 
 @router.post("/register", response_model=User_Out, status_code=201)
 def register(payload: Register_In, db: Session = Depends(get_db)):
-    """Create a new account. Answers 409 if the email is already registered."""
     # Emails are case-insensitive: normalise before storing or comparing.
     email = payload.email.lower()
 
@@ -42,7 +41,6 @@ def register(payload: Register_In, db: Session = Depends(get_db)):
 
 @router.post("/login", response_model=Token_Out)
 def login(payload: Login_In, db: Session = Depends(get_db)):
-    """Verify credentials and return a JWT together with the user's public profile."""
     user = db.scalar(select(User).where(User.email == payload.email.lower()))
 
     if user is None:

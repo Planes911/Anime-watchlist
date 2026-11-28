@@ -1,7 +1,4 @@
-"""Watch-progress endpoints: which anime the user is following and on which episode.
-
-All of them require a valid token, and a user can only ever touch their own rows.
-"""
+"""Watch-progress endpoints: which anime the user is following and on which episode."""
 
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy import select

@@ -17,7 +17,6 @@ router = APIRouter(prefix="/api/watchlist", tags=["Watchlist"], dependencies=[De
 
 @router.get("", response_model=list[Watchlist_Out])
 def get_watchlist(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Return the current user's watchlist, newest first."""
     stmt = (
         select(Watchlist_Item)
         # The user id always comes from the verified token, never from client input, so users can
@@ -31,7 +30,6 @@ def get_watchlist(user: User = Depends(get_current_user), db: Session = Depends(
 def add_to_watchlist(
     payload: Watchlist_Add_In, user: User = Depends(get_current_user), db: Session = Depends(get_db),
 ):
-    """Add a anime to the current user's watchlist (404 unknown anime, 409 duplicate)."""
     anime = db.get(Anime, payload.anime_id)
     if anime is None:
         raise Api_Error(404, "Anime tidak ditemukan.")
@@ -49,7 +47,6 @@ def add_to_watchlist(
     
 @router.delete("/{anime_id}", response_model=Message_Out)
 def remove_from_watchlist(anime_id: int, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """Remove a anime from the current user's watchlist."""
     item = db.scalar(
         select(Watchlist_Item).where(Watchlist_Item.user_id == user.id, Watchlist_Item.anime_id == anime_id)
     )

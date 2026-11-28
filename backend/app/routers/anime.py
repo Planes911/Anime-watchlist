@@ -16,7 +16,6 @@ router = APIRouter(prefix="/api/anime", tags=["Anime"])
 logger = logging.getLogger("animelog")
 
 def _escape_like(text: str) -> str:
-    """Escape LIKE wildcards so user input is matched literally (searching for '%' finds nothing)."""
     return text.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
 
 @router.get("", response_model=list[Anime_Out])
@@ -26,7 +25,6 @@ def list_animes(
     shuffle: bool = Query(False, description="Acak urutan hasil"),
     db: Session = Depends(get_db),
 ):
-    """List animes. Optional filters: genre (case-insensitive), search (title or studio), shuffle."""
     stmt = select(Anime).order_by(Anime.id)
     if genre:
         # EXISTS subquery on the many-to-many relation; the genre match is case-insensitive.
@@ -44,7 +42,6 @@ def list_animes(
 
 @router.get("/{anime_id}", response_model=Anime_Out)
 def get_anime(anime_id: int, db: Session = Depends(get_db)):
-    """Return a single anime, or 404 if it does not exist."""
     anime = db.get(Anime, anime_id)
     if anime is None:
         raise Api_Error(404, "Anime tidak ditemukan.")
